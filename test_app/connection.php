@@ -53,7 +53,7 @@ function getAllRecords()
 function getTodoTextById($id)
 {
     $dbh = connectPdo();
-    $sql = 'SELECT * FROM todos WHERE deleted_at IS NULL AND id = ' . $id;
+    $sql = "SELECT * FROM todos WHERE deleted_at IS NULL AND id = $id";
     $data = $dbh->query($sql)->fetch();
     return $data['content'];
 }
@@ -65,4 +65,12 @@ function deleteTodoData($id)
     /*
     ここの処理を考えて記述してください。
     */
+    $sql = "UPDATE todos SET deleted_at = :now WHERE deleted_at IS NULL AND id = :id";
+    // $dbh->query($sql);
+    $statement = $dbh->prepare($sql);
+    // PDO::prepare() ・・・文を実行する準備を行い、文オブジェクト(PDOStatement)を返す
+    $statement->bindValue('id', $id, PDO::PARAM_INT);
+    $statement->bindValue('now', $now, PDO::PARAM_STR);
+    // PDOStatement::bindValue() ・・・プレースホルダーと数値の紐付け。返り値はbool
+    $statement->execute();
 }

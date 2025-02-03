@@ -34,7 +34,9 @@ function savePostedData($post)
         case '/edit.php':
             updateTodoData($post);
             break;
-
+        case '/index.php':
+            deleteTodoData($post['id']);
+            break;
         default:
             break;
     }
