@@ -9,7 +9,9 @@ require_once('functions.php');
 // var_dump($_POST);
 // exit;
 
-createData($_POST);
+// createData($_POST); // 削除
+savePostedData($_POST);
+
 // $_POSTには何が入っているか？
 // -- POSTされたデータ。
 // -- データ型：　Array。連想配列。

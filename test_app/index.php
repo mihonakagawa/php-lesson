@@ -26,8 +26,10 @@ require_once('functions.php');
         <th>更新</th>
         <th>削除</th>
       </tr>
+      <!-- foreachの後{}が省略できる -->
       <?php foreach (getTodoList() as $todo): ?>
         <tr>
+          <!-- ↓ echo の省略形。'<?php echo $todo['id']; ?>'と同じ意味 -->
           <td><?= $todo['id']; ?></td>
           <td><?= $todo['content']; ?></td>
           <td>
