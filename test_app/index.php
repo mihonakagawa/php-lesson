@@ -1,5 +1,5 @@
-<!-- HTMLとPHPを混合して書く方法 -->
 <?php
+// HTMLとPHPを混合して書く方法
 // 上記で囲むと、HTMLの文中にPHPの処理を書くことができる。
 require_once('functions.php');
 ?>
@@ -8,7 +8,7 @@ require_once('functions.php');
 <head>
   <meta charset="UTF-8">
   <title>Home</title>
-  <link rel="styleshxeet" href="">
+  <link rel="stylesheet" href="">
 </head>
 <body>
   welcome hello world
@@ -33,7 +33,9 @@ require_once('functions.php');
           <td><?= $todo['id']; ?></td>
           <td><?= $todo['content']; ?></td>
           <td>
-            <a href="">更新</a>
+            <!--  ? 以下:クエリパラメータ。edit.phpに遷移し、かつクエリパラメータのデータをGETでedit.phpに送ることができる。 -->
+            <!-- GET・POSTの違いは？ -->
+            <a href="edit.php?id=<?= $todo['id']; ?>">更新</a>
           </td>
           <td>
             <form action="store.php" method="post">

@@ -1,5 +1,5 @@
 <?php
-// 新規作成③ postされたデータを使って、createData関数を呼び出している -->
+// 新規作成③ postされたデータを使って、createData関数を呼び出している
 
 require_once('functions.php');
 // require_once()は何のために記述している?

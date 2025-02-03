@@ -18,6 +18,11 @@ function getTodoList()
     // 上記関数が取得したレコード内容の配列が返ってくる
 }
 
+function getSelectedTodo($id)
+{
+    return getTodoTextById($id);
+}
+
 // 追加・更新・削除の振り分け
 function savePostedData($post)
 {
@@ -29,7 +34,7 @@ function savePostedData($post)
         case '/edit.php':
             updateTodoData($post);
             break;
-            
+
         default:
             break;
     }
