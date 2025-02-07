@@ -66,6 +66,8 @@ function deleteTodoData($id)
     ここの処理を考えて記述してください。
     */
     $sql = "UPDATE todos SET deleted_at = :now WHERE deleted_at IS NULL AND id = :id";
+    // 論理削除 という削除方式
+    
     // $dbh->query($sql);
     $statement = $dbh->prepare($sql);
     // PDO::prepare() ・・・文を実行する準備を行い、文オブジェクト(PDOStatement)を返す
