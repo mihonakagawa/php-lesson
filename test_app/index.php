@@ -2,6 +2,14 @@
 // HTMLとPHPを混合して書く方法
 // 上記で囲むと、HTMLの文中にPHPの処理を書くことができる。
 require_once('functions.php');
+
+// XSS攻撃：
+
+// header('Set-Cookie: userId=123'); // index.phpアクセス時にuserIdを生成する仕様とします。(今回はuserIdを静的に書いていますが本来は動的に生成されます。)
+
+// header('Set-Cookie: name=value; Secure; Path=/; SameSite=None; Partitioned;'); // クッキーを設定する
+// → こうすることで、index.phpを開くたびにブラウザに「今ならアンケートで1万円GET」のアラートが表示される
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -30,16 +38,17 @@ require_once('functions.php');
       <?php foreach (getTodoList() as $todo): ?>
         <tr>
           <!-- ↓ echo の省略形。'<?php echo $todo['id']; ?>'と同じ意味 -->
-          <td><?= $todo['id']; ?></td>
-          <td><?= $todo['content']; ?></td>
+          <td><?= e($todo['id']); ?></td>
+          <td><?= e($todo['content']); ?></td>
           <td>
             <!--  ? 以下:クエリパラメータ。edit.phpに遷移し、かつクエリパラメータのデータをGETでedit.phpに送ることができる。 -->
             <!-- GET・POSTの違いは？ -->
-            <a href="edit.php?id=<?= $todo['id']; ?>">更新</a>
+            <a href="edit.php?id=<?= e($todo['id']); ?>">更新</a>
           </td>
           <td>
             <form action="store.php" method="post">
-              <input type="hidden" name="id" value="<?= $todo['id']; ?>">
+              <input type="hidden" name="id" value="<?= e($todo['id']); ?>">
+              <!-- なぜidにもエスケープ処理（e関数）を入れる？ -->
               <button type="submit">削除</button>
             </form>
           </td>

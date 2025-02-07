@@ -11,6 +11,19 @@ require_once('connection.php');
 //   // -- 元々はnew.phpのinputタグのname属性と紐づいている。
 // }
 
+// エスケープ処理
+function e($text)
+{
+    // htmlspecialchars(エスケープする文字列, エスケープの種類, 文字コード);
+    return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+    // ENT_QUOTESを第二引数に指定してあげると・・・
+    // "(ダブルクォート)が&quot;に変換されます。
+    // '(シングルクォート)が&#039;または&apos;に変換されます。
+    // <が&lt;に変換されます。
+    // >が&gt;に変換されます。
+}
+
+
 // 一覧の取得
 function getTodoList()
 {
